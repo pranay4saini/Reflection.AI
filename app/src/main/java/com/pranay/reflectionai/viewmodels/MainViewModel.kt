@@ -19,6 +19,11 @@ class MainViewModel(private val repository: Repository):ViewModel() {
         }
 
     }
+   fun getMovies2(){
+       viewModelScope.launch(Dispatchers.IO) {
+           repository.getAllMovies1()
+       }
+   }
     val movies:LiveData<MoviesResponse>
         get() = repository.movies
 

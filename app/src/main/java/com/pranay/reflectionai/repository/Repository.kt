@@ -26,7 +26,7 @@ class Repository(
         if(NetworkUtils.isInternetAvailable(applicationContext)){
 
             val result = retrofitService.getAllMovies()
-            if (result?.body() != null){
+            if (result.body() != null){
 //                moviesDatabase.moviesDao().addMovies(result.body()!!.Movie_List)
                 moviesLiveData.postValue(result.body()!!)
 
@@ -41,5 +41,12 @@ class Repository(
 
 
     }
+    suspend fun getAllMovies1(){
+        val result = retrofitService.getAllMovie2()
+        if (result.body() != null){
+        moviesLiveData.postValue(result.body()!!)
+        }
+    }
+
 
 }

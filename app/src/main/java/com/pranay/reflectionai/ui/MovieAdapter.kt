@@ -5,18 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.pranay.reflectionai.GlideApp
 import com.pranay.reflectionai.databinding.AdapterMovieBinding
 import com.pranay.reflectionai.model.Movie
 
 class MovieAdapter:RecyclerView.Adapter<MainViewHolder>() {
 
-//    var movieList = mutableListOf<Movie>()
-    private val movies = ArrayList<Movie>()
+    var moviesList = mutableListOf<Movie>()
+
 
     fun setMovies(movies: List<Movie>) {
-        this.movies.clear()
-        this.movies.addAll(movies)
+        this.moviesList = movies.toMutableList()
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -26,10 +24,13 @@ class MovieAdapter:RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val movie = movies[position]
+        val movie = moviesList[position]
 
             holder.binding.movieName.text = movie.Title
-            GlideApp.with(holder.itemView.context)
+            holder.binding.cast.text ="""${"Cast"}:- ${movie.Cast}"""
+            holder.binding.runtime.text = movie.Runtime
+            holder.binding.realeaseYear.text = movie.Year
+            Glide.with(holder.itemView.context)
                 .load(movie.MoviePoster)
                 .transform(CircleCrop())
                 .into(holder.binding.image)
@@ -37,7 +38,7 @@ class MovieAdapter:RecyclerView.Adapter<MainViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return moviesList.size
     }
 
 }

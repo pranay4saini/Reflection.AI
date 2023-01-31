@@ -32,8 +32,15 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.movies.observe(this) {
             adapter.setMovies(it.Movie_List)
+            binding.floatingActionButton.setOnClickListener {
+                mainViewModel.getMovies2()
+
+            }
 
         }
+
+
+
 
 
     }

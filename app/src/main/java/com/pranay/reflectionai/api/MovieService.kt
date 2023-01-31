@@ -11,9 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface MovieService {
 
-    @GET("/1.json")
+    @GET("1.json")
     suspend fun getAllMovies(): Response<MoviesResponse>
 
+    @GET("2.json")
+    suspend fun getAllMovie2(): Response<MoviesResponse>
 
 
 }
